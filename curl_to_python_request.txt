@@ -1,0 +1,77 @@
+
+#You can use https://formatter.xyz/curl-to-python-converter to convert 
+#hidden API curl as a Python request.
+
+import requests
+
+cookies = {
+    'DDC.postalCode': '',
+    '__ssoid': 'f26c57ceac1300022127a0692d07a4a9',
+    'tcdkwid': '322627530',
+    'tcdcmpid': '554246',
+    'tcdadid': '562760295990',
+    'ddcref': 'fluency',
+    'gclid': 'CjwKCAjwt7SWBhAnEiwAx8ZLakkLVde1rp_PFHlNHAC4uVpnemBoRQR8jVASbFQM_6BnmQql4tNiVhoCQKYQAvD_BwE',
+    'ddcstdata': 'dGNka3dpZD0zMjI2Mjc1MzAmdGNkY21waWQ9NTU0MjQ2JnRjZGFkaWQ9NTYyNzYwMjk1OTkwJmRkY3JlZj1mbHVlbmN5JmdjbGlkPUNqd0tDQWp3dDdTV0JoQW5FaXdBeDhaTGFra0xWZGUxcnBfUEZIbE5IQUM0dVZwbmVtQm9SUVI4alZBU2JGUU1fNkJubVFxbDR0TmlWaG9DUUtZUUF2RF9Cd0Umc2Vzc2lvblJlZmVycmVyRG9tYWluPXd3dy5nb29nbGUuY28uanA',
+    'locale': 'en_US',
+    'hertzcarsales.seenPopup': 'true',
+    'callTrackingSessionId': 'arc5o2tdqul5i5v20f',
+    '_gtm_group': 'false',
+    '_ga_last': 'undefined',
+    'pxa_vals': 'pxa_ver^%^3D1.1^%^2Cpxa_med^%^3Dfluency^%^2Cpxa_kid^%^3D322627530^%^2Cpxa_pid^%^3Dddc^%^2Cpxa_adid^%^3D562760295990^%^2Cpxa_cid^%^3D554246',
+    'pxa_id': 'XE4cbL0N6ZOfQ99cAOblw6br',
+    '_gid': 'GA1.2.767888215.1657629598',
+    '_gac_UA-9899509-3': '1.1657629598.CjwKCAjwt7SWBhAnEiwAx8ZLakkLVde1rp_PFHlNHAC4uVpnemBoRQR8jVASbFQM_6BnmQql4tNiVhoCQKYQAvD_BwE',
+    '_gac_UA-1548043-2': '1.1657629598.CjwKCAjwt7SWBhAnEiwAx8ZLakkLVde1rp_PFHlNHAC4uVpnemBoRQR8jVASbFQM_6BnmQql4tNiVhoCQKYQAvD_BwE',
+    'userId': '62cd6b9f207a273e2d908a75',
+    'mycars': 'recentCars^%^3A0^%^3BsavedCars^%^3A0^%^3BpriceAlerts^%^3A0^%^3B',
+    'ddc_diag_akam_clientIP': '126.253.219.51',
+    'ddc_diag_akam_ghostIP': '23.35.110.230',
+    'bm_mi': '81A68C9E56C322A397FE505AF1BAE16F~YAAQ4m4jF9T5xLSBAQAAiWls8hC5LSWTelKXGkPdahP063E48syduH+pV3y7sq2yNnFbDoO3CRlrH/7cTCitPRddJgslTUEREvXhDMD/F1FGw02mb5o9bq0Swlcyl5Y32CMnjbDNrWudlaI2AMmxmuw4bSkcCgZK4JkOMd1MO/NSry3yW+T9qzAdpjPWnv+Vs+6JGuKVn7fCWg4EsLkrhF58NcYX5zECgW3bU0mpx8Ei+TQSVvOA9fiMFKFLeMQToQ7+T8qkByiV+F0mt70S52xgP7KfiAVvzheqwtM2ZnxI6lzd/Yd8GAXrRZmGhZl3kNiXSGQ9qT/uq3Mdc/ZS~1',
+    '_gcl_aw': 'GCL.1657629598.CjwKCAjwt7SWBhAnEiwAx8ZLakkLVde1rp_PFHlNHAC4uVpnemBoRQR8jVASbFQM_6BnmQql4tNiVhoCQKYQAvD_BwE',
+    '_gcl_au': '1.1.1042846163.1657629598',
+    'ddc_abcg_cache': '',
+    'ddc_abcamm_cache': '',
+    'ddc_abc_cache': '',
+    'ddc_abcc_cache': '',
+    'ak_bmsc': 'BD4E23E2E7DA663D50778CBCABD814C4~000000000000000000000000000000~YAAQ4m4jF9n5xLSBAQAA/mps8hAGnVDBU+6J6wKzNJ72cKAVcM69Bs4lYWfw4Ar3V+kdMqu1TgwSZ+xlPWjZaUaHomNuBCLwPa5NGbk4oBNeGOILmHXw0AF5AhwZ22RjLZ5hiQ0whxxNXgFpKPQ9IkYfiqND5JNLiNrkPOUiVXCC+dLuLzKV7W6iB/j/ilUPIIuyCAYsTCqaNJCJ2eVUBViJd7TE1flpksP201iuMS7twkke6hJkCVBlthP/aQA52mjhKE3CUdABn726EbdTATbPVLUMiHeRqRvacL2mGBKi/hvK2QFwaOSIRnrPMWp9LbLZA0DTbASQOgRZtII3oYmDkhPZg8rquFQ9ZsVpJpyncM+lY6OxzY68PC41w/vY78Z6ch7mLky1iswRLmRXYgSITP/eB/W5MQ5FEv71YJjIggAdW7NgGk1KEn74xlKOPljULeo1eg79w7F0lKnk8JEOcQqP4uMjSA8YgmK579A7e5K/dNGu6EI13Aq5G1MJ8pc/zKf4VLBlPyNkU4nul4JcZw==',
+    'pixall_cookie_sync': 'true',
+    'abc_3rd_party': '',
+    'pxa_ipv4': '126.253.219.51',
+    'abc': 'XE4cbL0N6ZOfQ99cAOblw6br',
+    'pxa_at': 'true',
+    '_fbp': 'fb.1.1657629598938.1025755115',
+    '_aeaid': '6db3d39d-5ef8-477d-bdcb-5f62061ccd84',
+    'aeatstartmessage': 'true',
+    'ddc_diag_akam_currentTime': '1657629640',
+    'ddc_diag_akam_requestID': '471f1839',
+    'ddc_diag_akam_fullPath': '/akam-sw-policy.json',
+    'AKA_A2': 'A',
+    'DDC.AllowUserData': 'true',
+    'dlVlpViews': '6',
+    '_uetsid': 'bd96e92001df11ed95db61d3539deb1b',
+    '_uetvid': 'bd973bd001df11edad4d13d927a68bbc',
+    '_ga': 'GA1.2.2030550082.1657629598',
+    'JSESSIONID': '56A66C02A2A2A60B4FBCE5E3A3479408',
+    'bm_sv': '0E63A07FAF73EB38561B1492A5B370D0~YAAQ5G4jF9ifW7SBAQAAwqRx8hB7cM1DP/5LzuCmAa4G345K+zFd30oEd4X9xm5ovMTWExp8lcZM00QRyXX9G0n5A46K3vKeBjqc1+1JWII+1FrK4jztSv9fcfrJt5u+/WRRMo4eSVOpS4bETdYc+cO+PU9p8g7OQfaSdKkezG7kg+luGsuRB5yEUrBcryOkkvE6D8dyMkG0RGKAH3I2PbsyMPlDszzWIFa1a7mM+UYDtcfdTcxl3KQKwHDPBQJWKi5r2nc9rCg=~1',
+    'akaalb_pixall_prod': '1657631743~op=ddc_ana_pixall_prod:eng_ana_pixall_prod-pico-us-west-2^|~rv=61~m=eng_ana_pixall_prod-pico-us-west-2:0^|~os=6aafa3aac97a52a58cd06655a170720e~id=6cfd19105d5ade7a8ea834a1b2e2865d',
+    '_gat_UA-9899509-3': '1',
+    '_ga_DRYFC644X2': 'GS1.1.1657629598.1.1.1657629978.0',
+}
+
+headers = {
+    'authority': 'www.hertzcarsales.com',
+    'accept': '*/*',
+    'accept-language': 'en-US,en;q=0.9',
+    'referer': 'https://www.hertzcarsales.com/morrow/used-cars.htm?geoRadius=0&make=INFINITI&geoZip=&start=0',
+    'sec-ch-ua': '^\^',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '^\^Windows^^',
+    'sec-fetch-dest': 'empty',
+    'sec-fetch-mode': 'no-cors',
+    'sec-fetch-site': 'same-origin',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36 Edg/103.0.1264.49',
+}
+
+response = requests.get('https://www.hertzcarsales.com/apis/widget/LOCATION_VLP_MORROW:inventory-data-bus1/getInventory?geoRadius=0&make=INFINITI&geoZip=&start=0', headers=headers, cookies=cookies)
+print(response.content)
